@@ -1,0 +1,50 @@
+axes.prop_cycle : (cycler('color', ['FC69FF', '00F3F7', 'FFA500', '55FA35', 'FFFE37', 'DED6F9']) + cycler('linestyle', ['-', '--', ':', '-.', (0, (3, 1, 1, 1, 1, 1)), (0, (3, 1, 1, 1))]))
+
+figure.figsize : 13, 7
+figure.facecolor : 35193e
+figure.titleweight : bold
+figure.edgecolor :  cyan
+
+font.family : monospace
+text.color : white
+
+axes.facecolor : 701f57
+axes.edgecolor : ad1759
+axes.titlecolor : white
+axes.titlepad : 20
+axes.titlesize : 23
+axes.grid : True
+axes.grid.axis : both
+axes.grid.which : both
+axes.labelsize : 18
+axes.labelcolor : white
+axes.labelpad : 10
+axes.xmargin: 0.01
+axes.ymargin: 0.02
+
+grid.color : white
+grid.linestyle: :
+grid.linewidth: 0.4
+grid.alpha: 1
+
+xtick.color : white
+xtick.labelcolor : white
+xtick.labelsize : 12
+ytick.labelcolor : white
+ytick.labelsize : 10
+xtick.major.pad : 8
+ytick.major.pad : 8
+
+lines.color : C1
+lines.linewidth : 2.5
+lines.markersize : 7
+lines.markeredgewidth : 0.3
+lines.markeredgecolor : white
+scatter.marker : o
+
+legend.facecolor : 35193e
+legend.shadow : True
+legend.fontsize : 15
+legend.fancybox : True
+legend.labelcolor : white
+legend.edgecolor : white
