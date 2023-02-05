@@ -2,6 +2,7 @@ axes.prop_cycle : (cycler('color', ['FC69FF', '00F3F7', 'FFA500', '55FA35', 'FFF
 
 figure.figsize : 13, 7
 figure.facecolor : 35193e
+figure.titlesize : 24
 figure.titleweight : bold
 figure.edgecolor :  cyan
 

@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 pd.options.display.float_format = '{:,.2f}'.format
 
 # DEFINE PROJECT COLORS --------------------------------------#
-very_dark = '#35193e'
-medium_dark = '#701f57'
-light_main = '#ad1759'
-light_complementary = '#f6b48f'
+very_dark = '#6C07B2'
+medium_dark = '#0F793C'
+light_main = '#A523FF'
+light_complementary = '#FFB83C'
 dark_font_color = 'black'
 light_font_color = 'white'
 
@@ -26,8 +26,8 @@ pretty_background = light_main
 pretty_text = light_font_color
 bgcolor = light_main
 text_color = light_font_color
-innerbackcolor = medium_dark
-outerbackcolor = very_dark
+innerbackcolor = very_dark
+outerbackcolor = '#08CC5B'
 fontcolor = light_font_color
 
 favorite_cmaps = ['cool', 'autumn', 'autumn_r', 'Set2_r', 'cool_r',
@@ -115,14 +115,14 @@ def pretty(data, label=None, fontsize='15px',
                         ('font-size', fontsize),
                         ('font-weight', 550),
                         ('text-align', 'left'),
-                        ('padding', '3px 10px 3px 10px')]},
+                        ('padding', '8px 10px 8px 10px')]},
              {'selector': '.row1',
               'props': [('background-color', pretty_background),
                         ('color', pretty_text),
                         ('font-size', fontsize),
                         ('font-weight', 'bold'),
                         ('text-align', 'left'),
-                        ('padding', '3px 10px 3px 10px')]},
+                        ('padding', '8px')]},
              {'selector': 'tbody',
               'props': [('border', '1px solid'),
                         ('border-color', 'black')]},
@@ -137,7 +137,7 @@ def pretty(data, label=None, fontsize='15px',
                         ('font-size', '15px'),
                         ('font-weight', 'bold'),
                         ('text-align', 'left'),
-                        ('padding', '3px 2px 5px 5px')]},
+                        ('padding', '8px')]},
              {'selector': 'tbody',
               'props': [('border', '1px solid'),
                         ('border-color', 'black')]},
@@ -175,7 +175,7 @@ def header_text(text, width=None, bgcolor=bgcolor, text_color=text_color,
           'props': [('background-color', bgcolor),
                     ('color', text_color),
                     ('font-size', fontsize),
-                    ('font-weight', '550'),
+                    ('font-weight', 600),
                     ('text-align', 'left'),
                     ('padding', '3px 30px 3px 50px')]},
          {'selector': 'td',
@@ -198,6 +198,50 @@ def describe_em(df, col_list, title = None, fontsize = '15px'):
         df_tuple = (df[column].describe(), 'df.' + column)
         df_list.append(df_tuple)
     multi(df_list)
+
+ 
+# .......................DF_OVERVIEW....................................... #
+
+def df_overview(df, 
+				title = 'DataFrame', 
+				num = 3, 
+				precision = 2,
+                fontsize = '16px',
+			   intraday = False):
+		
+	thousands = ",";
+	spaces = "&nbsp;&nbsp;&nbsp;"
+	table_attribute_string = "style='display:inline-block'"
+		
+		
+	df_describe = pd.DataFrame(df.describe())
+
+	df_dtypes = pd.DataFrame(df.dtypes).T
+	df_dtypes.rename(index={0: 'datatype'}, inplace = True)
+	missing_values = pd.DataFrame(df.isna().sum()).T
+	missing_values.rename(index = {0: 'missing values'}, inplace = True)
+
+	df_overview_cols = pd.concat([df_dtypes, missing_values, df_describe])
+
+	# ..................................................... #
+	attributes = {
+		'total rows': df.shape[0],
+		'total columns' : df.shape[1],
+		'column names' : ', '.join(list(df.columns)),
+		'index start': str(df.index[0]),
+		'index end' : str(df.index[-1]),
+		'total missing values' : df.isna().sum().sum()
+	}
+
+	df_data = pd.DataFrame(pd.Series(attributes))
+	
+	multi([(df_overview_cols, f'{title} Columns'),
+		  (df_data, f'{title} Key Points', 'hide columns')
+		  ], 
+		  precision = precision, fontsize = fontsize)
+	
+	
+	head_tail_horz(df, num, f'{title} Head and Tail', intraday = intraday)
 
 
 # .......................Time Stamp Converter....................................... #
@@ -358,7 +402,10 @@ def multi(data_list, fontsize='15px', precision=2, intraday=False):
             ('padding', '5px'),
             ('color', text_color),
             ('font-size', fontsize),
-            ('font-weight', 'bold')]}]
+            ('font-weight', 600)]},
+        {'selector': 'td',
+         'props': [
+             ('padding', '8px 10px 8px 10px')]}]
 
     thousands = ",";
     spaces = "&nbsp;&nbsp;&nbsp;"
@@ -367,9 +414,19 @@ def multi(data_list, fontsize='15px', precision=2, intraday=False):
     stylers = []
     for idx, pair in enumerate(data_list):
         if len(pair) == 2:
-            table_attribute_string = "style='display:inline-block'"
+            table_attribute_string = "style='display:inline-block; vertical-align: top;'"
         elif pair[2] == 'center':
-            table_attribute_string = "style='display:inline-grid'"
+            table_attribute_string = "style='display:inline-grid; vertical-align: top;'"
+        elif pair[2] == 'hide columns':
+            styler = force_df(data_list[idx][0], intraday=intraday).style \
+            .hide(axis = 'columns') \
+            .set_caption(data_list[idx][1]) \
+            .set_table_attributes(table_attribute_string) \
+            .set_table_styles(table_styling).format(precision=precision,
+                                                    thousands=thousands)
+            stylers.append(styler)
+            continue
+            
         styler = force_df(data_list[idx][0], intraday=intraday).style \
             .set_caption(data_list[idx][1]) \
             .set_table_attributes(table_attribute_string) \
@@ -413,7 +470,8 @@ def plot_lines(data_list, title = '',
                 color = 'cyan',
                 rot = 40,
                 loc = 2,
-               ):
+                logy = False,
+              ):
     
     for idx, group in enumerate(data_list):
         current = data_list[idx]
@@ -426,6 +484,8 @@ def plot_lines(data_list, title = '',
     plt.yticks(rotation = rot)
     if loc:
         plt.legend(loc = loc);
+    if logy:
+        plt.yscale('log')
     
 # ............................FANCY_PLOT....................................... #
 
