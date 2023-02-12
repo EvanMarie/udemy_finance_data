@@ -1,0 +1,98 @@
+axes.prop_cycle : (cycler('color', ['f77189','ce9032','97a431','32b166','36ada4','39a7d0','a48cf4','f561dd']) + cycler('linestyle', ['-', '--', ':', '-.', (0, (3, 1, 1, 1, 1, 1)), (0, (3, 1, 1, 1)), (0, (1, 10)), (0, (1, 1))]))
+
+figure.figsize : 13, 7
+figure.facecolor : F2059F
+figure.titlesize : 24
+figure.titleweight : bold
+figure.edgecolor :  cyan
+
+font.family : monospace
+text.color : black
+
+axes.facecolor : 04B2D9
+axes.edgecolor : F2CB05
+axes.titlecolor : black
+axes.titlepad : 20
+axes.titlesize : 23
+axes.grid : True
+axes.grid.axis : both
+axes.grid.which : both
+axes.labelsize : 18
+axes.labelcolor : black
+axes.labelpad : 10
+axes.xmargin: 0.01
+axes.ymargin: 0.02
+
+grid.color : white
+grid.linestyle: :
+grid.linewidth: 0.6
+grid.alpha: 1
+
+xtick.color : black
+xtick.labelcolor : black
+xtick.labelsize : 15
+ytick.labelcolor : black
+ytick.labelsize : 15
+xtick.major.pad : 8
+ytick.major.pad : 8
+
+lines.color : C1
+lines.linewidth : 2.5
+lines.markersize : 7
+lines.markeredgewidth : 0.3
+lines.markeredgecolor : white
+scatter.marker : o
+
+legend.facecolor : F2059F
+legend.shadow : True
+legend.fontsize : 15
+legend.fancybox : True
+legend.labelcolor : black
+legend.edgecolor : black
+
+# ******************************************************
+# BOXPLOT                                                                 
+# ******************************************************
+boxplot.notch:       True
+boxplot.vertical:    True
+boxplot.whiskers:    1.5
+boxplot.bootstrap:   None
+boxplot.patchartist: False
+boxplot.showmeans:   False
+boxplot.showcaps:    True
+boxplot.showbox:     True
+boxplot.showfliers:  True
+boxplot.meanline:    False
+
+boxplot.flierprops.color:           lightgray
+boxplot.flierprops.marker:          o
+boxplot.flierprops.markerfacecolor: white
+boxplot.flierprops.markeredgecolor: white
+boxplot.flierprops.markeredgewidth: 1.0
+boxplot.flierprops.markersize:      6
+boxplot.flierprops.linestyle:       none
+boxplot.flierprops.linewidth:       1.0
+
+boxplot.boxprops.color:     white
+boxplot.boxprops.linewidth: 1.0
+boxplot.boxprops.linestyle: -
+
+boxplot.whiskerprops.color:     white
+boxplot.whiskerprops.linewidth: 1.0
+boxplot.whiskerprops.linestyle: -
+
+boxplot.capprops.color:     white
+boxplot.capprops.linewidth: 1.0
+boxplot.capprops.linestyle: -
+
+boxplot.medianprops.color:     C1
+boxplot.medianprops.linewidth: 1.0
+boxplot.medianprops.linestyle: -
+
+boxplot.meanprops.color:           C2
+boxplot.meanprops.marker:          ^
+boxplot.meanprops.markerfacecolor: C2
+boxplot.meanprops.markeredgecolor: C2
+boxplot.meanprops.markersize:       6
+boxplot.meanprops.linestyle:       --
+boxplot.meanprops.linewidth:       1.0
